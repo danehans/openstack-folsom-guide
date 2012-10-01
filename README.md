@@ -13,4 +13,4 @@ Cinder : OK
 Horizon : OK
 Quantum with OVS Plugin & Agent : OK
 
-Quantum L3 -> in progress
+Quantum L3 -> in progress (I need to explain how to use Floating IP)
