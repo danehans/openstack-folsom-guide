@@ -181,7 +181,7 @@ allow_admin_api=true
 use_deprecated_auth=false
 ec2_private_dns_show_ip=True
 dmz_cidr=169.254.169.254/32
-ec2_dmz_host=169.254.169.254
+ec2_dmz_host=192.168.0.1
 metadata_host=192.168.0.1
 metadata_listen=0.0.0.0
 enabled_apis=ec2,osapi_compute,metadata
@@ -405,7 +405,7 @@ allow_admin_api=true
 use_deprecated_auth=false
 ec2_private_dns_show_ip=True
 dmz_cidr=169.254.169.254/32
-ec2_dmz_host=169.254.169.254
+ec2_dmz_host=192.168.0.1
 metadata_host=192.168.0.2
 metadata_listen=0.0.0.0
 enabled_apis=metadata
@@ -448,7 +448,14 @@ verbose=true</pre></li><li class="listitem"><p>Restart Nova services
 service nova-compute restart</pre></li></ul></div></li></ol></div><p>
             </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="OpenvSwitch"/>Open-vSwitch</h3></div></div></div><p>
                 </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Install the packages
-                            :</p><pre class="screen">apt-get install -y quantum-plugin-openvswitch-agent</pre></li><li class="listitem"><p>Start Open-vSwitch service &amp; restart the agent
+                            :</p><pre class="screen">apt-get install -y quantum-plugin-openvswitch-agent</pre></li><li class="listitem"><p>Edit <span class="bold"><strong>/etc/quantum/quantum.conf</strong></span> file
+                            and modify
+                            :</p><pre class="screen">core_plugin = \
+    quantum.plugins.openvswitch.ovs_quantum_plugin.OVSQuantumPluginV2
+auth_strategy = keystone
+fake_rabbit = False
+rabbit_host = 192.168.0.1
+rabbit_password = password</pre></li><li class="listitem"><p>Start Open-vSwitch service &amp; restart the agent
                             :</p><pre class="screen">/etc/init.d/openvswitch-switch start
 restart quantum-plugin-openvswitch-agent</pre></li><li class="listitem"><p>Configure virtual bridging
                             :</p><pre class="screen">ovs-vsctl add-br br-int</pre></li><li class="listitem"><p>Edit <span class="bold"><strong>/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini</strong></span>
