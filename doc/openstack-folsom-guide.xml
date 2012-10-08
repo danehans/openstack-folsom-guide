@@ -823,7 +823,7 @@ auth_tcp = "none" </programlisting></para>
                 <orderedlist>
                     <listitem>
                         <para>Install the packages
-                            :<screen>apt-get -y install nova-api-metadata nova-compute-kvm novnc</screen></para>
+                            :<screen>apt-get -y install nova-api-metadata nova-compute-kvm novnc nova-novncproxy</screen></para>
                     </listitem>
                     <listitem>
                         <para>Configure Nova :</para>
