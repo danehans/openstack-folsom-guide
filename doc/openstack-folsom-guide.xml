@@ -485,8 +485,7 @@ service novnc restart</screen></para>
                     </listitem>
                     <listitem>
                         <para>Start Open-vSwitch service &amp; restart the agent
-                            :<screen>/etc/init.d/openvswitch-switch start
-restart quantum-plugin-openvswitch</screen></para>
+                            :<screen>/etc/init.d/openvswitch-switch start</screen></para>
                     </listitem>
                     <listitem>
                         <para>Configure virtual bridging

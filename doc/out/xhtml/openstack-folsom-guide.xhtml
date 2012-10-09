@@ -226,8 +226,7 @@ service novnc restart</pre></li></ul></div></li></ol></div><p>
             </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="Open-vSwitch"/>Open-vSwitch</h3></div></div></div><p>
                 </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Install the packages
                             :</p><pre class="screen">apt-get install -y openvswitch-switch</pre></li><li class="listitem"><p>Start Open-vSwitch service &amp; restart the agent
-                            :</p><pre class="screen">/etc/init.d/openvswitch-switch start
-restart quantum-plugin-openvswitch</pre></li><li class="listitem"><p>Configure virtual bridging
+                            :</p><pre class="screen">/etc/init.d/openvswitch-switch start</pre></li><li class="listitem"><p>Configure virtual bridging
                             :</p><pre class="screen">ovs-vsctl add-br br-int
 ovs-vsctl add-br br-ex
 ovs-vsctl br-set-external-id br-ex bridge-id br-ex
