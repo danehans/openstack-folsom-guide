@@ -344,8 +344,8 @@ rabbit_password = password</screen></para>
                                         xlink:href="http://uec-images.ubuntu.com/releases/precise/release/ubuntu-12.04-server-cloudimg-amd64.tar.gz"
                                         >Ubuntu 12.04 UEC Image</link>
                                     :<screen>tar xzvf ubuntu-12.04-server-cloudimg-amd64.tar.gz
-glance image-create name="Ubuntu" is_public=true container_format=ovf \
-    disk_format=qcow2 &lt; precise-server-cloudimg-amd64.img</screen></para>
+glance image-create --name="Ubuntu" --public --container-format=ovf \
+    --disk-format=qcow2 &lt; precise-server-cloudimg-amd64.img</screen></para>
                             </listitem>
                             <listitem>
                                 <para>Check if the image has been introduced in the index

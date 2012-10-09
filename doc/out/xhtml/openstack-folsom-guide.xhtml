@@ -136,8 +136,8 @@ rabbit_password = password</pre></li><li class="listitem"><p>Restart Glance serv
                                     :</p><pre class="screen">service glance-api restart &amp;&amp; service glance-registry restart</pre></li><li class="listitem"><p>Create Glance tables into the database
                                     :</p><pre class="screen">glance-manage db_sync</pre></li><li class="listitem"><p>Download and import <a class="link" href="http://uec-images.ubuntu.com/releases/precise/release/ubuntu-12.04-server-cloudimg-amd64.tar.gz" target="_top">Ubuntu 12.04 UEC Image</a>
                                     :</p><pre class="screen">tar xzvf ubuntu-12.04-server-cloudimg-amd64.tar.gz
-glance image-create name="Ubuntu" is_public=true container_format=ovf \
-    disk_format=qcow2 &lt; precise-server-cloudimg-amd64.img</pre></li><li class="listitem"><p>Check if the image has been introduced in the index
+glance image-create --name="Ubuntu" --public --container-format=ovf \
+    --disk-format=qcow2 &lt; precise-server-cloudimg-amd64.img</pre></li><li class="listitem"><p>Check if the image has been introduced in the index
                                     :</p><pre class="screen">glance image-list
 
 +--------+---------+-------------+------------------+------------+--------+
