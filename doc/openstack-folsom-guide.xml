@@ -591,6 +591,11 @@ service quantum-l3-agent restart</screen></para>
                                 Routers with Private Networks</emphasis>"
                             use-case.<screen>./quantum-networking.sh</screen></para>
                     </listitem>
+                    <listitem>
+                        <para>We need now to configure again the L3 Agent in editing <emphasis
+                                role="bold">/etc/quantum/l3_agent.ini</emphasis> file and modify the
+                            values for router and external network.</para>
+                    </listitem>
                 </orderedlist>
             </para>        </section>
         <section xml:id="Cinder">
