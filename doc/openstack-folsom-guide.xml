@@ -52,9 +52,9 @@
         <db:note xmlns:db="http://docbook.org/ns/docbook">
             <db:para> That's a basic architecture, of course <emphasis role="bold">you can add many
                     compute nodes as you want</emphasis>.</db:para>
-        </db:note><para>Since Folsom code has not been release into stable Ubuntu Packages, we are going to use "<link
+        </db:note><para>In this document, we are going to use "<link
                 xlink:href="https://launchpad.net/~openstack-ubuntu-testing/+archive/folsom-trunk-testing"
-                >Folsom Testing Packages</link>" which are built from master for each
+                >Folsom Testing Packages</link>" which were built from folsom master branchs of each
             component.</para></section>
     <section xml:id="Requirements"><info><title>Requirements</title></info>
     
@@ -125,8 +125,8 @@ auto eth2
                         <itemizedlist>
                             <listitem>
                                 <para>Enable <emphasis role="bold">IP forwarding</emphasis> since
-                                    this node will be a gateway between external &amp; internal
-                                    network :</para>
+                                    this node will be a gateway (with quantum-l3-agent) between
+                                    external &amp; internal network :</para>
                             </listitem>
                         </itemizedlist>
                         <programlisting>sed -i -r 's/^\s*#(net\.ipv4\.ip_forward=1.*)/\1/' /etc/sysctl.conf
@@ -293,13 +293,13 @@ echo "source novarc">>.bashrc</screen></para>
                     <listitem>
                         <para>Download the <link
                                 xlink:href="https://github.com/EmilienM/openstack-folsom-guide/blob/master/scripts/keystone-data.sh"
-                                >data script</link> and fill Keystone database with datas
-                            :<screen>./keystone-data.sh</screen></para>
+                                >data script</link> and fill Keystone database with datas (users,
+                            tenants, services) :<screen>./keystone-data.sh</screen></para>
                     </listitem>
                     <listitem>
                         <para>Download the <link
                                 xlink:href="https://github.com/EmilienM/openstack-folsom-guide/blob/master/scripts/keystone-endpoints.sh"
-                                >endpoint script</link> and create the endpoints
+                                >endpoint script</link> and create the endpoints (for core projects)
                             :<screen>./keystone-endpoints.sh</screen></para>
                     </listitem>
                 </orderedlist>
@@ -344,7 +344,7 @@ rabbit_password = password</screen></para>
                                         xlink:href="http://uec-images.ubuntu.com/releases/precise/release/ubuntu-12.04-server-cloudimg-amd64.tar.gz"
                                         >Ubuntu 12.04 UEC Image</link>
                                     :<screen>tar xzvf ubuntu-12.04-server-cloudimg-amd64.tar.gz
-glance image-create --name="Ubuntu" --public --container-format=ovf \
+glance image-create --name="Ubuntu 12.04 UEC" --public --container-format=ovf \
     --disk-format=qcow2 &lt; precise-server-cloudimg-amd64.img</screen></para>
                             </listitem>
                             <listitem>

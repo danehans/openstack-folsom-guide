@@ -5,7 +5,7 @@
             share my experience with the community.</p><p>This document helps anyone who wants to deploy Folsom of
             OpenStack for development purpose.</p><div class="table"><a id="d5e15"/><p class="title"><strong>Table 1. Architecture and informations</strong></p><div class="table-contents"><table border="1"><colgroup><col class="c1"/><col class="c2"/><col class="newCol3"/></colgroup><thead><tr><th> </th><th>controller</th><th>compute</th></tr></thead><tbody><tr><td>Managment Network</td><td>192.168.0.1/24</td><td>192.168.0.2/24</td></tr><tr><td>Hostname</td><td>folsom-controller</td><td>folsom-compute</td></tr><tr><td>Services</td><td>MySQL, RabbitMQ, Nova, Cinder, Glance, Keystone, Quantum,
                             Open-vSwitch</td><td>nova-compute, KVM, nova-api, Quantum Agent with Open-vSwitch</td></tr></tbody></table></div></div><br class="table-break"/><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="/media/DATA/Mes Documents/Oxygen XML Author 14/frameworks/docbook/xsl/images/note.png"/></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p> That's a basic architecture, of course <span class="bold"><strong>you can add many
-                    compute nodes as you want</strong></span>.</p></td></tr></table></div><p>Since Folsom code has not been release into stable Ubuntu Packages, we are going to use "<a class="link" href="https://launchpad.net/~openstack-ubuntu-testing/+archive/folsom-trunk-testing" target="_top">Folsom Testing Packages</a>" which are built from master for each
+                    compute nodes as you want</strong></span>.</p></td></tr></table></div><p>In this document, we are going to use "<a class="link" href="https://launchpad.net/~openstack-ubuntu-testing/+archive/folsom-trunk-testing" target="_top">Folsom Testing Packages</a>" which were built from folsom master branchs of each
             component.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="Requirements"/>Requirements</h2></div></div></div><p>You need at least two machines (virtual or physical) with 3 NIC (Managment Network + VMs
             Traffic in tunnel mode + Public Network) for controller node and 2 NIC (Managment
             Network + VMs Traffic in tunnel mode) for compute node. You need also to download Ubuntu
@@ -38,8 +38,8 @@ auto eth2
     down ifconfig $IFACE down</pre><p>Then,
                         restart network service :</p><pre class="screen">service networking restart</pre><p>
                         </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Enable <span class="bold"><strong>IP forwarding</strong></span> since
-                                    this node will be a gateway between external &amp; internal
-                                    network :</p></li></ul></div><p>
+                                    this node will be a gateway (with quantum-l3-agent) between
+                                    external &amp; internal network :</p></li></ul></div><p>
                         </p><pre class="programlisting">sed -i -r 's/^\s*#(net\.ipv4\.ip_forward=1.*)/\1/' /etc/sysctl.conf
 echo 1 &gt; /proc/sys/net/ipv4/ip_forward </pre><p>
                         </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Edit the <span class="bold"><strong>/etc/hosts</strong></span> file and
@@ -119,8 +119,8 @@ export SERVICE_ENDPOINT="http://localhost:35357/v2.0"
 export SERVICE_TOKEN=password</pre></li></ul></div><p>
                         </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Export the variables
                                     :</p><pre class="screen">source novarc
-echo "source novarc"&gt;&gt;.bashrc</pre></li></ul></div></li><li class="listitem"><p>Download the <a class="link" href="https://github.com/EmilienM/openstack-folsom-guide/blob/master/scripts/keystone-data.sh" target="_top">data script</a> and fill Keystone database with datas
-                            :</p><pre class="screen">./keystone-data.sh</pre></li><li class="listitem"><p>Download the <a class="link" href="https://github.com/EmilienM/openstack-folsom-guide/blob/master/scripts/keystone-endpoints.sh" target="_top">endpoint script</a> and create the endpoints
+echo "source novarc"&gt;&gt;.bashrc</pre></li></ul></div></li><li class="listitem"><p>Download the <a class="link" href="https://github.com/EmilienM/openstack-folsom-guide/blob/master/scripts/keystone-data.sh" target="_top">data script</a> and fill Keystone database with datas (users,
+                            tenants, services) :</p><pre class="screen">./keystone-data.sh</pre></li><li class="listitem"><p>Download the <a class="link" href="https://github.com/EmilienM/openstack-folsom-guide/blob/master/scripts/keystone-endpoints.sh" target="_top">endpoint script</a> and create the endpoints (for core projects)
                             :</p><pre class="screen">./keystone-endpoints.sh</pre></li></ol></div><p>
             </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="Glance"/>Glance</h3></div></div></div><p>
                 </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Install the packages
@@ -136,7 +136,7 @@ rabbit_password = password</pre></li><li class="listitem"><p>Restart Glance serv
                                     :</p><pre class="screen">service glance-api restart &amp;&amp; service glance-registry restart</pre></li><li class="listitem"><p>Create Glance tables into the database
                                     :</p><pre class="screen">glance-manage db_sync</pre></li><li class="listitem"><p>Download and import <a class="link" href="http://uec-images.ubuntu.com/releases/precise/release/ubuntu-12.04-server-cloudimg-amd64.tar.gz" target="_top">Ubuntu 12.04 UEC Image</a>
                                     :</p><pre class="screen">tar xzvf ubuntu-12.04-server-cloudimg-amd64.tar.gz
-glance image-create --name="Ubuntu" --public --container-format=ovf \
+glance image-create --name="Ubuntu 12.04 UEC" --public --container-format=ovf \
     --disk-format=qcow2 &lt; precise-server-cloudimg-amd64.img</pre></li><li class="listitem"><p>Check if the image has been introduced in the index
                                     :</p><pre class="screen">glance image-list
 
@@ -280,7 +280,8 @@ service quantum-l3-agent restart</pre></li><li class="listitem"><p>Download my <
                             tenant network with its router, and one external network connected to
                             the tenant router. We are using the "<span class="bold"><strong>Per-tenant
                                 Routers with Private Networks</strong></span>"
-                            use-case.</p><pre class="screen">./quantum-networking.sh</pre></li></ol></div><p>
+                            use-case.</p><pre class="screen">./quantum-networking.sh</pre></li><li class="listitem"><p>We need now to configure again the L3 Agent in editing <span class="bold"><strong>/etc/quantum/l3_agent.ini</strong></span> file and modify the
+                            values for router and external network.</p></li></ol></div><p>
             </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="Cinder"/>Cinder</h3></div></div></div><p>
                 </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Install the packages
                             :</p><pre class="screen">apt-get install -y cinder-api cinder-scheduler cinder-volume iscsitarget \
