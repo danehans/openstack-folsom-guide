@@ -378,7 +378,8 @@ glance image-create --name="Ubuntu 12.04 UEC" --public --container-format=ovf \
                     <listitem>
                         <para>Install the packages
                             :<screen>apt-get -y install nova-api nova-cert nova-common \
-    nova-scheduler python-nova python-novaclient nova-consoleauth novnc</screen></para>
+    nova-scheduler python-nova python-novaclient nova-consoleauth novnc \
+    nova-novncproxy</screen></para>
                     </listitem>
                     <listitem>
                         <para>Configure Nova :</para>
@@ -723,10 +724,6 @@ auto eth1
     netmask 255.255.255.0</screen>Then,
                         restart network service :<screen>service networking restart</screen></para>
                     <para>
-                        <db:note xmlns:db="http://docbook.org/ns/docbook">
-                            <db:para>If <emphasis role="bold">eth1</emphasis> is connected to a
-                                Switch, it should be in tagged mode.</db:para>
-                        </db:note>
                         <itemizedlist>
                             <listitem>
                                 <para>Enable <emphasis role="bold">IP forwarding</emphasis> :</para>
@@ -827,7 +824,7 @@ auth_tcp = "none" </programlisting></para>
                 <orderedlist>
                     <listitem>
                         <para>Install the packages
-                            :<screen>apt-get -y install nova-api-metadata nova-compute-kvm novnc nova-novncproxy</screen></para>
+                            :<screen>apt-get -y install nova-api-metadata nova-compute-kvm</screen></para>
                     </listitem>
                     <listitem>
                         <para>Configure Nova :</para>
@@ -904,7 +901,7 @@ image_service=nova.image.glance.GlanceImageService
 
 # novnc #
 novnc_enable=true
-novncproxy_base_url=http://192.168.0.2:6080/vnc_auto.html
+novncproxy_base_url=http://192.168.0.1:6080/vnc_auto.html
 vncserver_proxyclient_address=127.0.0.1
 vncserver_listen=0.0.0.0
 
@@ -977,10 +974,6 @@ root_helper = sudo /usr/bin/quantum-rootwrap /etc/quantum/rootwrap.conf</screen>
                     </listitem>
                 </orderedlist>
             </para>        </section>
-    </section>
-    <section xml:id="Play"><info><title>Create your first VM</title></info>
-        
-        <para>This section is going to be written very soon.</para>
     </section>
     <section xml:id="Credits">
         <info>
