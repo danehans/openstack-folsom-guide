@@ -13,8 +13,8 @@
     <section xml:id="Introduction"><info>
             <title>Introduction</title>
         </info><para>I'm writing this document a few weeks before Folsom stable release. I could not resist to
-            share my experience with the community.</para><para>This document helps anyone who wants to deploy Folsom of
-            OpenStack for development purpose.</para>
+            share my experience with the community.</para><para>This document helps anyone who wants to deploy Folsom of OpenStack for development purpose.
+            I'll try to maintain during Folsom cycle.</para>
             <table frame="all">
                 <info>
                     <title>Architecture and informations</title>
