@@ -38,7 +38,7 @@ EXT_NET_NAME="ext_net"
 
 # External Network addressing - our official 
 # Internet IP address space
-EXT_NET_CIDR="192.168.1.128/24"
+EXT_NET_CIDR="7.7.7.128/25"
 EXT_NET_LEN=${EXT_NET_CIDR#*/}
 
 # External bridge that we have configured 
@@ -47,15 +47,15 @@ EXT_NET_BRIDGE=br-ex
 
 # IP of external bridge (br-ex) - this node's 
 # IP in our official Internet IP address space:
-EXT_GW_IP="192.168.1.168"
+EXT_GW_IP="7.7.7.8"
 
 # IP of the Public Network Gateway - The 
 # default GW in our official Internet IP address space:
-EXT_NET_GATEWAY="192.168.1.1"
+EXT_NET_GATEWAY="7.7.7.1"
 
 # Floating IP range
-POOL_FLOATING_START="192.168.1.130"	# First public IP to be used for VMs
-POOL_FLOATING_END="192.168.1.150"	# Last public IP to be used for VMs 
+POOL_FLOATING_START="7.7.7.130"	# First public IP to be used for VMs
+POOL_FLOATING_END="7.7.7.150"	# Last public IP to be used for VMs 
 
 ###############################################################
 
