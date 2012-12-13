@@ -38,7 +38,7 @@ EXT_NET_NAME="ext_net"
 
 # External Network addressing - our official 
 # Internet IP address space
-EXT_NET_CIDR="7.7.7.128/25"
+EXT_NET_CIDR="7.7.7.0/24"
 EXT_NET_LEN=${EXT_NET_CIDR#*/}
 
 # External bridge that we have configured 
