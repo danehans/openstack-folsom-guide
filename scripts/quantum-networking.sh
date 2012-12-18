@@ -107,3 +107,8 @@ connect_providerrouter_to_externalnetwork() {
 create_net $TENANT_NAME $TENANT_NETWORK_NAME $PROV_ROUTER_NAME $FIXED_RANGE $NETWORK_GATEWAY
 create_ext_net $EXT_NET_NAME $EXT_NET_CIDR $EXT_NET_BRIDGE $EXT_NET_GATEWAY $POOL_FLOATING_START $POOL_FLOATING_END
 connect_providerrouter_to_externalnetwork $PROV_ROUTER_NAME $EXT_NET_NAME
+
+# Configure br-ex to reach public network :
+ip addr flush dev $EXT_NET_BRIDGE
+ip addr add $EXT_GW_IP/$EXT_NET_LEN dev $EXT_NET_BRIDGE
+ip link set $EXT_NET_BRIDGE up
