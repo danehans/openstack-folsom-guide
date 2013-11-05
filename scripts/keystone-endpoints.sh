@@ -14,18 +14,19 @@
 
 
 # MySQL definitions
-MYSQL_USER=keystone
+MYSQL_USER=keystone_admin
 MYSQL_DATABASE=keystone
-MYSQL_HOST=localhost
-MYSQL_PASSWORD=password
+MYSQL_HOST=192.168.220.40
+MYSQL_PASSWORD=keystone_db_pass
 
 # Keystone definitions
 KEYSTONE_REGION=RegionOne
-SERVICE_TOKEN=password
-SERVICE_ENDPOINT="http://localhost:35357/v2.0"
+SERVICE_TOKEN=keystone_admin_token
+SERVICE_ENDPOINT="http://192.168.220.40:35357/v2.0"
 
 # other definitions
-MASTER="192.168.0.1"
+MASTER="192.168.220.40"
+SWIFT_MASTER="192.168.220.60"
 
 while getopts "u:D:p:m:K:R:E:S:T:vh" opt; do
   case $opt in
@@ -110,7 +111,9 @@ keystone service-create --name glance --type image --description 'OpenStack Imag
 keystone service-create --name swift --type object-store --description 'OpenStack Storage Service'
 keystone service-create --name keystone --type identity --description 'OpenStack Identity'
 keystone service-create --name ec2 --type ec2 --description 'OpenStack EC2 service'
-keystone service-create --name quantum --type network --description 'OpenStack Networking service'
+keystone service-create --name neutron --type network --description 'OpenStack Networking service'
+keystone service-create --name heat-cfn --type cloudformation --description 'Heat CloudFormation API'
+keystone service-create --name heat --type orchestration --description 'Heat Orchestration API'
 
 create_endpoint () {
   case $1 in
@@ -135,6 +138,12 @@ create_endpoint () {
     ;;
     ec2)
     keystone endpoint-create --region $KEYSTONE_REGION --service-id $2 --publicurl 'http://'"$MASTER"':8773/services/Cloud' --adminurl 'http://'"$MASTER"':8773/services/Admin' --internalurl 'http://'"$MASTER"':8773/services/Cloud'
+    ;;
+    cloudformation)
+    keystone endpoint-create --region $KEYSTONE_REGION --service-id $2 --publicurl 'http://'"$MASTER"':8000/v1' --adminurl 'http://'"$MASTER"':8000/v1' --internalurl 'http://'"$MASTER"':8000/v1'
+    ;;
+    orchestration)
+    keystone endpoint-create --region $KEYSTONE_REGION --service-id $2 --publicurl 'http://'"$MASTER"':8004/v1/\$(tenant_id)s' --adminurl 'http://'"$MASTER"':8004/v1/\$(tenant_id)s' --internalurl 'http://'"$MASTER"':8004/v1/\$(tenant_id)s'
     ;;
     network)
     keystone endpoint-create --region $KEYSTONE_REGION --service-id $2 --publicurl 'http://'"$MASTER"':9696/' --adminurl 'http://'"$MASTER"':9696/' --internalurl 'http://'"$MASTER"':9696/'
