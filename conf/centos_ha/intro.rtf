@@ -1,0 +1,48 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf320
+{\fonttbl\f0\fnil\fcharset0 Consolas;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs24 \cf0 in the mean time I send what collected in term of current config files.\
+It is a tgz file with this kind of structure:\
+\
+# ll openstack_conf_061113_0044\
+total 48\
+drwxr-xr-x 3 root root 4096 Nov\'a0\'a06 00:44 compute01\
+drwxr-xr-x 3 root root 4096 Nov\'a0\'a06 00:44 compute02\
+drwxr-xr-x 3 root root 4096 Nov\'a0\'a06 00:44 control01\
+drwxr-xr-x 3 root root 4096 Nov\'a0\'a06 00:44 control02\
+drwxr-xr-x 3 root root 4096 Nov\'a0\'a06 00:44 control03\
+drwxr-xr-x 3 root root 4096 Nov\'a0\'a06 00:44 slb01\
+drwxr-xr-x 3 root root 4096 Nov\'a0\'a06 00:44 slb02\
+drwxr-xr-x 3 root root 4096 Nov\'a0\'a06 00:44 swift01\
+drwxr-xr-x 3 root root 4096 Nov\'a0\'a06 00:44 swift02\
+drwxr-xr-x 3 root root 4096 Nov\'a0\'a06 00:44 swift03\
+drwxr-xr-x 3 root root 4096 Nov\'a0\'a06 00:44 swiftproxy01\
+drwxr-xr-x 3 root root 4096 Nov\'a0\'a06 00:44 swiftproxy02\
+\
+under each directory there is the tree (eg etc/swift/swift.conf) of\
+relevant config files for that host\
+there is also a file named active_services.txt that contains, sorted,\
+the services that are configured to start at boot at level 3 on that\
+host.\
+\
+ip resolution is\
+compute01\'a0\'a0\'a0\'a0\'a0\'a0 A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.13\
+compute02\'a0\'a0\'a0\'a0\'a0\'a0 A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.16\
+swiftproxy02\'a0\'a0\'a0\'a0A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.17\
+swiftproxy01\'a0\'a0\'a0\'a0A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.18\
+control02\'a0\'a0\'a0\'a0\'a0\'a0 A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.19\
+control01\'a0\'a0\'a0\'a0\'a0\'a0 A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.20\
+swift01\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.21\
+control03\'a0\'a0\'a0\'a0\'a0\'a0 A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.22\
+swift02\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.23\
+swift03\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.24\
+slb01\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.25\
+slb02\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.26\
+control\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.27\
+swiftproxy\'a0\'a0\'a0\'a0\'a0\'a0A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.28\
+oat\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 A\'a0\'a0\'a0\'a0\'a0\'a0 192.168.33.29\
+}
