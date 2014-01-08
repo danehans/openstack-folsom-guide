@@ -111,9 +111,9 @@ keystone service-create --name glance --type image --description 'OpenStack Imag
 keystone service-create --name swift --type object-store --description 'OpenStack Storage Service'
 keystone service-create --name keystone --type identity --description 'OpenStack Identity'
 keystone service-create --name ec2 --type ec2 --description 'OpenStack EC2 service'
-keystone service-create --name neutron --type network --description 'OpenStack Networking service'
 keystone service-create --name heat-cfn --type cloudformation --description 'Heat CloudFormation API'
 keystone service-create --name heat --type orchestration --description 'Heat Orchestration API'
+keystone service-create --name neutron --type network --description 'OpenStack Networking service'
 
 create_endpoint () {
   case $1 in
@@ -151,7 +151,7 @@ create_endpoint () {
   esac
 }
 
-for i in compute volume image object-store identity ec2 network; do
+for i in compute volume image object-store identity ec2 cloudformation orchestration network; do
   id=`mysql -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" -ss -e "SELECT id FROM service WHERE type='"$i"';"` || exit 1
   create_endpoint $i $id
 done
